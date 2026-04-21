@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import BASE_URL from '../api';
 import { useNavigate } from 'react-router-dom';
 
 const EXAMPLE_TARGETS = [
@@ -39,7 +40,7 @@ export default function ScanPage() {
     }, 1400);
 
     try {
-      const res = await axios.post('/api/scan', { url });
+      const res = await axios.post(`${BASE_URL}/api/scan`, { url });
       clearInterval(interval);
       navigate(`/results/${res.data.scan_id}`);
     } catch (e) {
