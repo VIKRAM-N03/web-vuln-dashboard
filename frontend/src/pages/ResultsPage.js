@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import BASE_URL from '../api';
 import { SeverityBadge, FindingCard, RiskScore } from '../components/Components';
 
 const SEV_ORDER = { Critical: 0, High: 1, Medium: 2, Low: 3 };
@@ -13,7 +14,7 @@ export default function ResultsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`/api/scans/${scanId}`)
+   axios.get(`${BASE_URL}/api/scans/${scanId}`)
       .then(r => { setData(r.data); setLoading(false); })
       .catch(() => { setLoading(false); });
   }, [scanId]);
