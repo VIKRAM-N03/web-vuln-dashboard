@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 import axios from 'axios';
+import BASE_URL from '../api';
 import { StatCard } from '../components/Components';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,8 +13,8 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('/api/stats').then(r => setStats(r.data)).catch(() => {});
-    axios.get('/api/scans').then(r => setScans(r.data)).catch(() => {});
+    axios.get(`${BASE_URL}/api/stats`).then(r => setStats(r.data)).catch(() => {});
+    axios.get(`${BASE_URL}/api/scans`).then(r => setScans(r.data)).catch(() => {});
   }, []);
 
   const pieData = stats ? Object.entries(stats.by_severity).map(([name, value]) => ({ name, value })).filter(d => d.value > 0) : [];
